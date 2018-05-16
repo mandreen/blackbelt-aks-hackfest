@@ -18,7 +18,14 @@ We are going to be installing Prometheus and Grafana into our K8s cluster using 
 
 2. Initialize Helm
     ```
-    helm init
+    TLS Handshake issues
+    https://github.com/Azure/AKS/issues/112
+
+    Dial TCP Helm Issues    
+    https://github.com/kubernetes/helm/issues/2464
+    kubectl -n kube-system patch deployment tiller-deploy -p '{"spec": {"template": {"spec": {"automountServiceAccountToken": true}}}}'
+
+    helm init --service-account default
     ```
 
 3. Validate Helm and Tiller were installed successfully
